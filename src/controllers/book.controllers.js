@@ -10,10 +10,17 @@ export const createBook = async(req, res) => {
     if(pages === undefined || pages === "") return res.status(400).json({Message: "Debe completar el número de páginas del libro."});
     if(genre === undefined || genre === "") return res.status(400).json({Message: "Debe completar el género literario del libro."});
 
-    const bookInt = Math.floor(bookInt)
-    if(pages !== bookInt) return res.status(400).json({Message: "El número de paginas del libro tiene que ser un número entero positivo."})
+    const pageNumber = Number(pages);
+if (!Number.isInteger(pageNumber) || pageNumber <= 0) {
+  return res.status(400).json({Message: "El número de páginas debe ser un número entero positivo."});
+}
 
-    const bookCreate = await Book.create({title, autor, pages, genre, description })
+    // const bookInt = Math.floor(bookInt)
+    // if(pages !== bookInt) return res.status(400).json({Message: "El número de paginas del libro tiene que ser un número entero positivo."})
+
+    // const bookCreate = await Book.create({title, autor, pages, genre, description })
+    const bookCreate = await Book.create({ title, autor, pages: pageNumber, genre, description });
+
     res.status(200).json({Message: "El libro fue creado con exito", bookCreate});
     } catch (error) {
         console.log("Error al crear el libro");
