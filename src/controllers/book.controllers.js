@@ -38,6 +38,7 @@ export const updatedBook = async(req, res) => {
     {
         where: {id: req.params.id}
     });
+    res.status(200).json({Message: "se actualizó correctamente la información"});
     } catch (error) {
         console.log("Error al actualizar la información");
         res.status(500).json({Message: "Error al actualizar la información del libro", error})
