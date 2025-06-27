@@ -1,6 +1,5 @@
 import express from "express";
 import {createBook, getAllBook, getBookById, updateBook, deleteBook} from "..controllers/book.controllers.js";
-import { DECIMAL } from "sequelize";
 
 const router = express.Router();
 
